@@ -1,3 +1,8 @@
+pyrightconfig.json
+__pycache__
+.data
+.env
+.ruff_cache
 # Created by https://www.toptal.com/developers/gitignore/api/pycharm+all,virtualenv
 # Edit at https://www.toptal.com/developers/gitignore?templates=pycharm+all,virtualenv
 
@@ -103,6 +108,3 @@ pyvenv.cfg
 .venv
 pip-selfcheck.json
 */.data
-
-# End of https://www.toptal.com/developers/gitignore/api/pycharm+all,virtualenv.env
-.ruff_cache
