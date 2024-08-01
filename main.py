@@ -51,6 +51,12 @@ class LokiClient:
         res = self.httpx_client.get(url)
         return res.json()
 
+    def query_loki(self, query: str):
+        url = f"{self.base_url}/query"
+        params = {"query": query}
+        res = self.httpx_client.get(url, params=params)
+        return res.json()
+
 
 async def query_loki(query: str, ranged: bool = False):
     loki_url = "http://localhost:3100/loki/api/v1/query"
@@ -113,8 +119,9 @@ async def process_query(query: UserQuery):
         ],
         response_model=LogQLQuery,
     )
+    logs = loki_client.query_loki(logql_query.query)
 
-    return logql_query
+    return logs
     #
     # resp = client.chat.completions.create(
     #     model="gpt-4-turbo",
