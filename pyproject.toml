@@ -11,6 +11,8 @@ python = "^3.12"
 fastapi = "^0.111.1"
 httpx = "^0.27.0"
 logging = "^0.4.9.6"
+litellm = "^1.42.7"
+instructor = "^1.3.7"
 
 
 [build-system]
@@ -19,4 +21,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pyright]
 venvPath = "."
-venv = ".venv"
+venv = "/home/sidbin/.cache/pypoetry/virtualenvs/loki-wrapper-6xHTOm4i-py3.12/bin/"
