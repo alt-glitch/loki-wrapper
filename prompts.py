@@ -688,9 +688,38 @@ the result will be
 ```
 """
 
+datadog_query_prompt = """You are an expert in Datadog's query language for the Trace Explorer. Your task is to help users construct valid queries based on their requirements. Use the following syntax rules and guidelines to formulate your responses:
+
+1. Queries consist of one or more terms separated by spaces.
+2. Terms can be simple strings or key:value pairs.
+3. Key:value pairs use a colon (:) to separate the key from the value.
+4. String values containing spaces must be enclosed in double quotes.
+5. Numeric values don't require quotes.
+6. Boolean operators (AND, OR, NOT) can be used to combine multiple conditions.
+7. Parentheses can be used to group conditions and control precedence.
+8. Wildcards (*) can be used for partial matching in string values.
+9. Range queries for numeric values use square brackets, e.g., [1 TO 100].
+10. Special characters in values should be escaped with a backslash (\).
+11. Reserved characters include: +, -, =, &&, ||, >, <, !, (, ), {, }, [, ], ^, ", ~, *, ?, :, \, /
+12. Facet search syntax uses curly braces {}, e.g., @http.status_code:{200 OR 300}
+13. Autocomplete suggestions are available for attribute names and values.
+
+When constructing queries, consider using common attributes like:
+- service: The name of the service
+- resource_name: The name of the traced resource
+- @http.status_code: The HTTP status code
+- @http.method: The HTTP method
+- @http.url: The URL of the request
+- duration: The duration of the span in nanoseconds
+
+Please provide a valid Datadog query based on the following user request:
+
+Ensure your response includes only the constructed query, without any additional explanations."""
+
 SYSTEM_PROMPT = f"""
 You are a system administrator and principal platform engineer. Your tech stack of choice is Grafana, Loki, ELK stack.
-Given a user's natural language queries on Grafana Loki logs, you will be generating accurate LogQL queries and searching for the relevant logs.
+Given a user's natural language queries on Grafana Loki logs, you will be generating accurate LogQL queries and 
+searching for the relevant logs.
 
 You ONLY respond with LogQL queries.
 
